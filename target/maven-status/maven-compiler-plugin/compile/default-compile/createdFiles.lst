@@ -1,0 +1,4 @@
+com/darena/automation/Cons.class
+com/darena/automation/util/CapabilityReader.class
+com/darena/automation/util/AppiumServer.class
+com/darena/automation/BaseTest.class
