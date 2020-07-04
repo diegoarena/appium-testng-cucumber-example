@@ -1,4 +1,4 @@
-package com.darena.automation.page;
+package com.darena.automation.screens;
 
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.MobileElement;
@@ -37,7 +37,4 @@ public class LoginScreen {
     public MobileElement getLoginResultTextView(){
         return loginResultTextView;
     }
-
-
-
 }
