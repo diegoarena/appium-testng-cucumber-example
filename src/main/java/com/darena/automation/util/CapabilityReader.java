@@ -2,12 +2,15 @@ package com.darena.automation.util;
 
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.io.FileReader;
 import java.util.Iterator;
-import java.util.Set;
+
+/**
+ *
+ * @author diego arena <diego88arena@gmail.com>
+ *
+ */
 
 public class CapabilityReader {
 
