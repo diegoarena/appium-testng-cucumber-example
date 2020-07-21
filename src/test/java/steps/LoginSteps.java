@@ -17,7 +17,7 @@ import javax.inject.Inject;
  */
 public class LoginSteps {
 
-    @Inject
+   @Inject
     private TestContext testContext;
     @Inject
     private LoginScreen loginScreen;
@@ -41,6 +41,7 @@ public class LoginSteps {
     @And("I stay in the login screen")
     public void I_stay_in_the_login_screen() {
         Assert.assertTrue(loginScreen.getPageTitle().isDisplayed());
+
     }
 
 

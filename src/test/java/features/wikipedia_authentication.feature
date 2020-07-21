@@ -1,5 +1,6 @@
-Feature: A user signs in
-  Scenario: Login with invalid credentials
+@smoke
+Feature: A user authenticates in
+  Scenario: Login with invalid credentials2
     Given A user with invalid credentials
     When I try to login
     Then I stay in the login screen
@@ -8,7 +9,7 @@ Feature: A user signs in
       Incorrect username or password entered.
       Please try again.
       """
-  Scenario: Login with valid credentials
+  Scenario: Login with valid credentials2
     Given A user with invalid credentials
     When I try to login
     Then Screen shows an error message

@@ -4,6 +4,7 @@ import com.darena.automation.AppiumConfigurator;
 import com.darena.automation.TestContext;
 import com.google.inject.Inject;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.apache.commons.io.FileUtils;
@@ -27,14 +28,14 @@ public class Hook {
         new AppiumConfigurator().setupAppium(testContext);
     }
 
-    @After
+    @AfterStep
     public void takeScreenshot(Scenario scenario) throws Exception{
         // Take a screenshot...
-        if (scenario.isFailed()) {
+       if (scenario.isFailed()) {
+            String featureFileName = new File(scenario.getUri().getPath()).getName();
             final byte[] screenshot = ((TakesScreenshot) AppiumConfigurator.getDriver()).getScreenshotAs(OutputType.BYTES);
-            FileUtils.writeByteArrayToFile(new File("/Users/diegoarena/Desktop/error.png"),screenshot);
+            FileUtils.writeByteArrayToFile(new File("target/screenshots/"+featureFileName+"_"+scenario.getName()+".png"),screenshot);
         }
     }
-
 
 }
