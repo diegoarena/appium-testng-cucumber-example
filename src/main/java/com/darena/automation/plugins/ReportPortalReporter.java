@@ -11,6 +11,8 @@ import java.io.File;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReportPortalReporter implements ConcurrentEventListener {
 
@@ -42,6 +44,7 @@ public class ReportPortalReporter implements ConcurrentEventListener {
         eventPublisher.registerHandlerFor(TestCaseFinished.class, this::testCaseFinishedEvent);
         eventPublisher.registerHandlerFor(TestStepStarted.class, this::stepStarted);
         eventPublisher.registerHandlerFor(TestStepFinished.class, this::stepFinished);
+
     }
 
     /**
@@ -66,6 +69,7 @@ public class ReportPortalReporter implements ConcurrentEventListener {
      */
     public void testRunFinished(TestRunFinished event) {
         try {
+
             reportPortal.finishLaunch( launchUuid,event.getInstant().toString());
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -102,7 +106,7 @@ public class ReportPortalReporter implements ConcurrentEventListener {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        System.out.println("------SCENARIO STARTED: " + event.getTestCase().getName() + " " + StringUtils.substringAfterLast(event.getTestCase().getUri().toString(), "/"));
+        System.out.println("------SCENARIO STARTED: " + event.getTestCase().getName() + " " + event.getTestCase().getLine() + " "+event.getTestCase().getId().toString());
     }
 
     /**
@@ -167,8 +171,8 @@ public class ReportPortalReporter implements ConcurrentEventListener {
     }
 
     /**
-     * Returns true if the specified is the last of the feature file
-     * This method is a workaround since I couldn't find a way to know when cucumber finishes the run of of all the scenarios in the feature file
+     * This method is a workaround. I couldn't find a way to know when the execution of a feature file ends
+     * So this method gives me the last scenario of the current feature file, with that info I know if the current scenario is the last in the feature file
      *
      * @param scenarioDescription
      * @param featureFilePath
@@ -176,10 +180,17 @@ public class ReportPortalReporter implements ConcurrentEventListener {
      */
     public boolean isLastScenario(String scenarioDescription, String featureFilePath) {
         try {
-            String featureFile = FileUtils.readFileToString(new File(featureFilePath), "utf8");
-            String scenarios[] = StringUtils.substringsBetween(featureFile, "Scenario: ", "\n");
-            if (scenarios[scenarios.length - 1].contentEquals(scenarioDescription)) {
-                return true;
+            List<String> featureFile = FileUtils.readLines(new File(featureFilePath), "utf8");
+            for(int i = featureFile.size() -1 ; i > -1; i--){
+                String line = featureFile.get(i).trim();
+                if(line.startsWith("Scenario:") || line.startsWith("Scenario Outline:") ){
+                    String lastScenarioDescription = !StringUtils.substringAfter(line,"Scenario Outline:").isEmpty() ? StringUtils.substringAfter(line,"Scenario Outline:"): StringUtils.substringAfter(line,"Scenario:");
+                    if(lastScenarioDescription.equalsIgnoreCase(scenarioDescription)){
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
             }
         } catch (Exception ex) {
 
@@ -188,8 +199,7 @@ public class ReportPortalReporter implements ConcurrentEventListener {
     }
 
     /**
-     * This method is a workaround. I couldn't find a way to know when cucumbers ends the execution of a feature file
-     * So this method gives me the last scenario of the current feature file, with that info I know if the current scenario is the last in the feature file
+     * This method returns the description of the feature
      *
      * @param featureFilePath
      * @return
