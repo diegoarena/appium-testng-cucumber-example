@@ -13,7 +13,7 @@ import io.cucumber.java.Scenario;
 
 @CucumberOptions(
         features = {"src/test/java/features/"},
-        plugin = {"com.darena.automation.plugins.ReportPortalReporter:src/test/resources/reportportal.properties"},
+        plugin = {"com.darena.automation.plugins.ReportPortalPlugin:src/test/resources/reportportal.properties"},
         glue = {"steps"},
         tags = {"@smoke"},
         strict = true

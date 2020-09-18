@@ -20,7 +20,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.File;
 import java.net.URLConnection;
 import java.util.*;
@@ -35,7 +34,6 @@ public class ReportPortal {
     private String projectName;
     private String launchDescription;
     private final String REPORT_PORTAL_API_VERSION = "v1";
-
 
     public ReportPortal(String reportPortalConfigFile) throws ConfigurationException {
         Configuration config = new Configurations().properties(reportPortalConfigFile);
@@ -141,7 +139,6 @@ public class ReportPortal {
         if (status != null)
             body.put("status", status);
         //execute report portal api
-        //System.out.println("-------- "+body.toJSONString());
         JSONObject apiResponse = callReportPortalApiService(endPointUrl + "/api/v1/" + projectName + "/item/" + suiteId, "put", new StringEntity(body.toJSONString()), 200);
     }
 
@@ -177,6 +174,7 @@ public class ReportPortal {
         builder.addBinaryBody("json_request_part", jsonBodyFile, ContentType.APPLICATION_JSON, "body.json");
         //execute request to create test result
         JSONObject apiResponse = callReportPortalApiService(endPointUrl + "/api/v1/" + projectName + "/log", "post", builder.build(), 201);
+        //System.out.println("** ADDING LOGS "+FileUtils.readFileToString(new File("body.json"),"utf-8")+ " "+apiResponse.toJSONString());
         jsonBodyFile.delete();
     }
 
@@ -216,7 +214,7 @@ public class ReportPortal {
      * @return
      */
     public String getLaunchUrl(String reportNumber) {
-        return endPointUrl + "ui/#" + projectName + "/launches/all/" + reportNumber;
+        return endPointUrl + "/ui/#" + projectName + "/launches/all/" + reportNumber;
     }
 
 }

@@ -13,7 +13,7 @@ import io.appium.java_client.android.AndroidDriver;
  */
 public class AppiumConfigurator {
 
-    private static MobileDriver<MobileElement> driver;
+    private  MobileDriver<MobileElement> driver;
 
     public void setupAppium(TestContext testContext) throws Exception{
         AppiumServer.startServer();
@@ -33,7 +33,7 @@ public class AppiumConfigurator {
        getDriver().launchApp();
     }
 
-    public static MobileDriver getDriver(){
+    public  MobileDriver getDriver(){
         return driver;
     }
 }

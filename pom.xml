@@ -100,6 +100,8 @@
             <artifactId>commons-configuration2</artifactId>
             <version>${apache.commons.configuration2.version}</version>
         </dependency>
+
+
     </dependencies>
     <repositories>
         <repository>
@@ -129,7 +131,7 @@
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suite.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/suites/${suite}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

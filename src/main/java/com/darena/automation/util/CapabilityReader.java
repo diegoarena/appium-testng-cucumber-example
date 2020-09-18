@@ -14,6 +14,12 @@ import java.util.Iterator;
 
 public class CapabilityReader {
 
+    /**
+     * This method reads capabilities file
+     * @param capabilityFile
+     * @return
+     * @throws Exception
+     */
     public static DesiredCapabilities readCapabilities(String capabilityFile) throws Exception{
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader(capabilityFile));
