@@ -12,6 +12,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class TestContext {
 
     private MobileDriver driver;
+    private String configurationFile;
 
     public MobileDriver getDriver() {
         return driver;
@@ -19,5 +20,13 @@ public class TestContext {
 
     public void setDriver(MobileDriver driver) {
         this.driver = driver;
+    }
+
+    public String getConfigurationFile() {
+        return configurationFile;
+    }
+
+    public void setConfigurationFile(String configurationFile) {
+        this.configurationFile = configurationFile;
     }
 }

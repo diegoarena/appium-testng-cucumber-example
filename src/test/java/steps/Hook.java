@@ -28,14 +28,20 @@ public class Hook {
         new AppiumConfigurator().setupAppium(testContext);
     }
 
-    @AfterStep()
+
+
+    @After(order = 1)
     public void takeScreenshot(Scenario scenario) throws Exception{
         // Take a screenshot...
        if (scenario.isFailed()) {
-            String featureFileName = new File(scenario.getUri().getPath()).getName();
             byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot,"image/png",scenario.getName()+".png");
        }
+    }
+
+    @After(order = 2)
+    public void stopAppium() throws Exception{
+        new AppiumConfigurator().stopAppium();
     }
 
 }

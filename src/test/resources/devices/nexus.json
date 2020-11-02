@@ -1,0 +1,11 @@
+{
+  "platformName": "Android",
+  "platformVersion": "5.1.0",
+  "deviceName": "Nexus_4",
+  "avd": "Nexus_4",
+  "automationName": "UiAutomator2",
+  "appActivity": "com.eliasnogueira.trianguloapp.MainActivity",
+  "appPackage": "com.eliasnogueira.trianguloapp",
+  "app": "src/test/resources/apps/TrianguloApp.apk",
+  "clearSystemFiles": false
+}

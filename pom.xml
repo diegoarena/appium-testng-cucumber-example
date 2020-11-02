@@ -103,6 +103,7 @@
 
 
     </dependencies>
+    <!--
     <repositories>
         <repository>
             <snapshots>
@@ -122,6 +123,7 @@
             </snapshots>
         </repository>
     </repositories>
+    -->
     <build>
         <plugins>
             <plugin>
@@ -133,6 +135,25 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/suites/${suite}</suiteXmlFile>
                     </suiteXmlFiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.trivago.rta</groupId>
+                <artifactId>cluecumber-report-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>reporting</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceJsonReportDirectory>${project.build.directory}/cucumber-report</sourceJsonReportDirectory>
+                    <generatedHtmlReportDirectory>${project.build.directory}/generated-report</generatedHtmlReportDirectory>
+                    <expandBeforeAfterHooks>true</expandBeforeAfterHooks>
                 </configuration>
             </plugin>
         </plugins>

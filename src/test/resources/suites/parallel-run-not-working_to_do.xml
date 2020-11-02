@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Triangle" thread-count="2" parallel="tests">
+
+    <test name="Galaxy">
+        <parameter name="configFile" value="galaxy.json" />
+        <classes>
+            <class name="runner.SmokeRunner"/>
+        </classes>
+    </test>
+
+    <test name="Pixel">
+        <parameter name="configFile" value="nexus.json" />
+        <classes>
+            <class name="runner.SmokeRunner"/>
+        </classes>
+    </test>
+
+</suite> <!-- Suite -->
