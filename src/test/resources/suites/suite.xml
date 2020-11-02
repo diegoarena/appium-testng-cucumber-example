@@ -7,4 +7,10 @@
             <class name="runner.SmokeRunner"/>
         </classes>
     </test>
+    <test name="Galaxy">
+        <parameter name="configFile" value="galaxy.json" />
+        <classes>
+            <class name="runner.SmokeRunner"/>
+        </classes>
+    </test>
 </suite>
